@@ -1,0 +1,10 @@
+server:
+port: 8081
+
+spring:
+  data:
+    mongodb:
+      host: localhost           # MongoDB host
+      port: 27017              # MongoDB port
+      database: BookInventory           # Name of the database
+
