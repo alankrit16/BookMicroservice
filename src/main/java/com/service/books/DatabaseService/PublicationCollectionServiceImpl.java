@@ -1,5 +1,6 @@
 package com.service.books.DatabaseService;
 
+import com.service.books.Exception.NoRecordFoundException;
 import com.service.books.Model.PublicationDAO;
 import com.service.books.Repositories.PublicationRepository;
 import org.slf4j.Logger;
@@ -21,20 +22,22 @@ public class PublicationCollectionServiceImpl implements PublicationCollectionSe
 
     @Override
     public Mono<PublicationDAO> registerPublication(PublicationDAO publicationDAO) {
-        return publicationRepository.save(publicationDAO).flatMap(object->{
-            log.info(object.toString());
-            return Mono.just(object);
-                })
+        return publicationRepository.save(publicationDAO)
                 .onErrorResume(Mono::error);
     }
 
     @Override
     public Flux<PublicationDAO> getAllPublications() {
         return publicationRepository.findAllPublications()
-                .flatMap(responseObj->{
-            log.info(responseObj.toString());
-            return Flux.just(responseObj);
-        })
                 .onErrorResume(Mono::error);
     }
+
+    @Override
+    public Mono<PublicationDAO> getPublisher(String publisherId) {
+        return publicationRepository.findPublisher(publisherId)
+                .switchIfEmpty(Mono.error(new NoRecordFoundException("No Record Found for publisher Id "+publisherId)))
+                .onErrorResume(Mono::error);
+    }
+
+
 }

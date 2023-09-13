@@ -11,4 +11,6 @@ public interface PublicationCollectionService {
     Mono<PublicationDAO> registerPublication(PublicationDAO publicationDAO);
 
     Flux<PublicationDAO> getAllPublications();
+
+    Mono<PublicationDAO> getPublisher(String publisherId);
 }

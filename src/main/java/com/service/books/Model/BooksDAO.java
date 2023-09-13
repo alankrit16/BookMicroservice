@@ -8,7 +8,27 @@ public class BooksDAO {
     @Id
     private String bookId;
     private String bookName;
-    private String author;
+
+    private String publisherName;
+    private String authorId;
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    private String authorName;
+
+    public String getPublisherName() {
+        return publisherName;
+    }
+
+    public void setPublisherName(String publisherName) {
+        this.publisherName = publisherName;
+    }
 
     public String getBookId() {
         return bookId;
@@ -26,11 +46,11 @@ public class BooksDAO {
         this.bookName = bookName;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 }
